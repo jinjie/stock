@@ -12,6 +12,8 @@
     ],
     "minimum-stability": "dev",
     "require": {
+        "php": ">=7.1",
+        "silverstripe/cms": "^4",
         "kokspflanze/alpha-vantage-api": "^0.3"
     }
 }
