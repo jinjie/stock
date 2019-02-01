@@ -1,0 +1,17 @@
+---
+name: stockconfig
+---
+
+SilverStripe\SiteConfig\SiteConfig:
+  extensions:
+    - SwiftDevLabs\Stock\Extension\SiteConfig
+
+SilverStripe\CMS\Model\SiteTree:
+  extensions:
+    - SwiftDevLabs\Stock\Extension\SiteTree
+
+SilverStripe\Core\Injector\Injector:
+  Psr\SimpleCache\CacheInterface.stockCache:
+    factory: SilverStripe\Core\Cache\CacheFactory
+    constructor:
+      namespace: "stockCache"

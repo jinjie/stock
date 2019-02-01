@@ -1,0 +1,17 @@
+{
+    "name": "jinjie/stock",
+    "description": "Display stock widget in SilverStripe",
+    "keywords": ["silverstripe", "stock", "alphavantage"],
+    "type": "silverstripe-vendormodule",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Kong Jin Jie",
+            "email": "jinjie@swiftdev.sg"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "kokspflanze/alpha-vantage-api": "^0.3"
+    }
+}
