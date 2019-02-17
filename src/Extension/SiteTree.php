@@ -94,10 +94,19 @@ class SiteTree extends DataExtension
             $tickStatus = 'up';
         }
 
+        // Convert API timezone to local time zone
+        $convertDateTime = \DateTime::createFromFormat(
+            'Y-m-d H:i:s',
+            $lastUpdated,
+            new \DateTimeZone('US/Eastern')
+        );
+
+        $convertDateTime->setTimeZone(new \DateTimezone(date_default_timezone_get()));
+
         return ArrayData::create([
             'Symbol'        => $stockSymbol,
             'LastPrice'     => DBCurrency::create()->setValue($lastPrice),
-            'LastUpdated'   => DBDatetime::create()->setValue($lastUpdated),
+            'LastUpdated'   => DBDatetime::create()->setValue($convertDateTime->format('Y-m-d H:i:s')),
             'PreviousClose' => DBCurrency::create()->setValue($previousClose),
             'TickStatus'    => $tickStatus,
         ])->renderWith('Stock/StockWidget');
