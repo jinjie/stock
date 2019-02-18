@@ -63,7 +63,6 @@ class SiteTree extends DataExtension
         $lastPrice            = floatval(current($data["Time Series ({$interval})"])['1. open']);
         $lastUpdated          = $data['Meta Data']['3. Last Refreshed'];
         $lastUpdatedTimestamp = strtotime($lastUpdated);
-        $previousDay          = date('Y-m-d', strtotime('-1 day', $lastUpdatedTimestamp));
 
         // Time Series Daily
         $cacheKey = 'daily' . $stockSymbol . $interval . $cacheExpiry;
@@ -84,6 +83,9 @@ class SiteTree extends DataExtension
                 $cacheExpiry
             );
         }
+
+        $days = array_keys($data['Time Series (Daily)']);
+        $previousDay = $days[1];
 
         $previousClose = floatval($data["Time Series (Daily)"][$previousDay]['4. close']);
         $tickStatus = 'even';
