@@ -108,7 +108,7 @@ class SiteTree extends DataExtension
 
         $convertDateTime->setTimeZone(new \DateTimezone(date_default_timezone_get()));
 
-        $priceDifference = $lastPrice - $previousClose;
+        $priceDifference = number_format($lastPrice - $previousClose, 3);
         $percentDifference = ($priceDifference / $previousClose) * 100;
 
         return ArrayData::create([
