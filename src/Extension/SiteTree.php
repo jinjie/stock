@@ -46,10 +46,17 @@ class SiteTree extends DataExtension
         $data     = $cache->get($cacheKey);
 
         if (! $data) {
-            $data = $avClient->timeSeries()->intraday(
-                $stockSymbol,
-                $interval
-            );
+            try {
+                $data = $avClient->timeSeries()->intraday(
+                    $stockSymbol,
+                    $interval
+                );
+            } catch (\Exception $e) {
+                return sprintf(
+                    "There is a problem displaying stock ticker for %s ",
+                    $stockSymbol
+                );
+            }
 
             if (isset($data['Note'])) {
                 return $data['Note'];
@@ -72,9 +79,16 @@ class SiteTree extends DataExtension
         $data     = $cache->get($cacheKey);
 
         if (! $data) {
-            $data = $avClient->timeSeries()->daily(
-                $stockSymbol
-            );
+            try {
+                $data = $avClient->timeSeries()->daily(
+                    $stockSymbol
+                );
+            } catch (\Exception $e) {
+                return sprintf(
+                    "There is a problem displaying stock ticker for %s ",
+                    $stockSymbol
+                );
+            }
 
             if (isset($data['Note'])) {
                 return $data['Note'];
